@@ -37,7 +37,7 @@ void A1007_()
 			int MAX = max(dp[i - 1][j], dp[i][j - 1]);
 			if (A[i] == B[j])
 			{
-				dp[i][j] = MAX + 1;
+				dp[i][j] = dp[i-1][j-1]+ 1;
 			}
 			else
 				dp[i][j] = MAX;
