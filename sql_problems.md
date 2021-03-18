@@ -9,7 +9,7 @@ select distinct(salary) t from salaries where to_data='9999-01-01' order by t de
 
 9.获取所有部门当前manager的当前薪水情况，给出dept_no, emp_no以及salary，当前表示to_date='9999-01-01'
 ```sql
-
+select de.dept_no,de.emp_no,s.salary from dept_manager de left join salaries s on de.emp_no=s.emp_no where de.to_date='9999-01-01' and s.to_date='9999-01-01';
 ```
 
 
