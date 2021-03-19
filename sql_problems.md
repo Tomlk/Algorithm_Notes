@@ -42,6 +42,10 @@ select title,count(distinct emp_no) t from titles goupy by title having t>=2;
 select * from employees where last_name!='Mary' and emp_no%2==1 order by hire_date desc;
 ```
 
+16.统计出当前各个title类型对应的员工当前（to_date='9999-01-01'）薪水对应的平均工资。结果给出title以及平均工资avg。
+```sql
+select t.title,avg(s.salary) from titles t left join salaries s on t.emp_no=s.emp_no where s.to_date='9999-01-01' and t.to_date='9999-01-01' group by t.title;
+```
 
 
 
