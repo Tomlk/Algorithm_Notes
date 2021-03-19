@@ -1,3 +1,7 @@
+2.查找入职员工时间排名倒数第三的员工的所有信息
+```sql
+select * from employees where hire_date=(select dinstinct hire_date from employees order by hire_date desc limit 2,1);
+```
 7.查找薪水涨幅超过15次的员工号emp_no以及其对应的涨幅次数t
 ```sql
 select emp_no,count(emp_no) t from salaries groupy by emp_no having t>15;
@@ -55,6 +59,20 @@ select emp_no,salary from salaries where to_date = '9999-01-01' order by salary 
 select e.emp_no,s.salary,e.last_name,e.first_name from employees e left join salaries s on e.emp_no=s.emp_no where 
 s.salary=(select max(salary) from salaries where to_date='9999-01-01' and salary!=(select max(salary) from salaries));
 ```
+
+19.查找所有员工的last_name和first_name以及对应的dept_name，也包括暂时没有分配部门的员工
+```sql
+select e.last_name,e.first_name,depart.dept_name from employees e left join dept_emp dept on e.emp_no=dept.emp_no left join departments depart on dept.dept_no=depart.dept_no'
+```
+20.查找员工编号emp_no为10001其自入职以来的薪水salary涨幅值growth
+```sql
+select max(salary)-min(salary) growth from employees where emp_no=10001;
+```
+21.查找所有员工自入职以来的薪水涨幅情况，给出员工编号emp_no以及其对应的薪水涨幅growth，并按照growth进行升序
+```sql
+select end.emp_no,(end.salary-start.salary) growth from(select emp_no,salary from salaries where to_date='9999-01-01') end left join (select s.emp_no,salary from salaries s inner join employees e on s.emp_no=e.emp_no where s.from_date=e.hire_date) start on start.emp_no=end.emp_no order by growth;
+```
+
 
 
 
