@@ -50,6 +50,11 @@ select t.title,avg(s.salary) from titles t left join salaries s on t.emp_no=s.em
 ```sql
 select emp_no,salary from salaries where to_date = '9999-01-01' order by salary desc limit 1,1
 ```
+18.查找当前薪水(to_date='9999-01-01')排名第二多的员工编号emp_no、薪水salary、last_name以及first_name，不准使用order by
+```sql
+select e.emp_no,s.salary,e.last_name,e.first_name from employees e left join salaries s on e.emp_no=s.emp_no where 
+s.salary=(select max(salary) from salaries where to_date='9999-01-01' and salary!=(select max(salary) from salaries));
+```
 
 
 
