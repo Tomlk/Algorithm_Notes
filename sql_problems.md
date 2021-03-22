@@ -80,8 +80,19 @@ select dept_no,dept_name,sum(all_add) sum from
 inner join 
 (select emp_no,count(salary) all_add from salaries s group by emp_no) s 
 on info.emp_no=s.emp_no group by dept_no
+```
+23.对所有员工的薪水按照salary进行按照1-N的排名
+```sql
+select s1.emp_no,s1.salary,count(distinct s2.salary)
+from salaries as s1 ,salaries as s2
+where s1.to_date='9999-01-01' 
+    and s2.to_date='9999-01-01'
+    and s1.salary<=s2.salary
+group by s1.emp_no
+order by s1.salary desc,s1.emp_no asc
 
 ```
+
 
 
 
