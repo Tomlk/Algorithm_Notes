@@ -73,6 +73,16 @@ select max(salary)-min(salary) growth from employees where emp_no=10001;
 select end.emp_no,(end.salary-start.salary) growth from(select emp_no,salary from salaries where to_date='9999-01-01') end left join (select s.emp_no,salary from salaries s inner join employees e on s.emp_no=e.emp_no where s.from_date=e.hire_date) start on start.emp_no=end.emp_no order by growth;
 ```
 
+22.统计各个部门对应员工涨幅的次数总和，给出部门编码dept_no、部门名称dept_name以及次数sum
+```sql
+select dept_no,dept_name,sum(all_add) sum from
+(select emp_no,d.dept_no,dept_name from dept_emp de left join departments d on de.dept_no=d.dept_no) info 
+inner join 
+(select emp_no,count(salary) all_add from salaries s group by emp_no) s 
+on info.emp_no=s.emp_no group by dept_no
+
+```
+
 
 
 
