@@ -93,6 +93,10 @@ order by s1.salary desc,s1.emp_no asc
 
 ```
 
+24.获取所有非manager员工当前的薪水情况，给出dept_no、emp_no以及salary ，当前表示to_date='9999-01-01'
+```sql
+select de.dept_no,de.emp_no,s.salary left join salaries s on de.emp_no=s.emp_no where de.emp_no not in(select emp_no from dept_manager) and s.to_date='9999-01-01';
+```
 
 
 
