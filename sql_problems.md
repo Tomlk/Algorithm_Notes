@@ -97,7 +97,11 @@ order by s1.salary desc,s1.emp_no asc
 ```sql
 select de.dept_no,de.emp_no,s.salary left join salaries s on de.emp_no=s.emp_no where de.emp_no not in(select emp_no from dept_manager) and s.to_date='9999-01-01';
 ```
+25.获取员工其当前的薪水比其manager当前薪水还高的相关信息，当前表示to_date='9999-01-01', 结果第一列给出员工的emp_no， 第二列给出其manager的manager_no， 第三列给出该员工当前的薪水emp_salary, 第四列给该员工对应的manager当前的薪水manager_salary
 
+```sql
+
+```
 
 
 
